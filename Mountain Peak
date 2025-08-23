@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Function to find the next higher peak for each element in heights
+int* next_higher_peak(int* heights, int n) {
+    // Write your code here
+    int* res= (int*)malloc(n*sizeof(int));
+    int* stack=(int*)malloc(n*sizeof(int));
+    int top=-1;
+    for(int i=0;i<n;i++){
+        res[i]=-1; }
+        for(int i=0;i<n;i++){
+            while(top>=0 && heights[i]>heights[stack[top]]){
+                int idx=stack[top--];
+                res[idx]=heights[i];
+            }
+            stack[++top]=i;
+        }
+        free(stack);
+        return res;
+}
+
+int main() {
+    int n;
+    // Take the size of the heights array as input
+    scanf("%d", &n);
+    
+    int* heights = (int*)malloc(n * sizeof(int));
+
+    // Take the heights array elements as input
+    for (int i = 0; i < n; ++i) {
+        scanf("%d", &heights[i]);
+    }
+
+    // Get the next higher peaks
+    int* result = next_higher_peak(heights, n);
+
+    // Print the result
+    for (int i = 0; i < n; ++i) {
+        printf("%d ", result[i]);
+    }
+
+    // Free allocated memory for heights and result arrays
+    free(heights);
+    free(result);
+
+    return 0;
+}
