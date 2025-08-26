@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include<stdlib.h>
+int cmp(const void *a, const void *b){
+    long long x=*(long long *)a;
+    long long y=*(long long *)b;
+    if(x<y) return -1;
+    if(x>y) return 1;
+    return 0;
+}
+int main() {
+	int n;
+	long long d;
+	scanf("%d %lld",&n,&d);
+	long long s[n];
+	for(int i=0;i<n;i++) {
+	    scanf("%lld",&s[i]);
+	}
+	qsort(s,n,sizeof(long long),cmp);
+	int p=0;
+	int i=0;
+	while(i<n-1){
+	    if(s[i+1]-s[i]<=d){
+	        p++;
+	        i+=2;
+	    }
+	    else {
+	        i++;
+	    }
+	}
+	printf("%d\n",p);
+	return 0;
+}
