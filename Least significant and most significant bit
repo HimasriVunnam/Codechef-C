@@ -1,0 +1,19 @@
+#include <stdio.h>
+int flip(int n) {
+    n=n^1;
+    int pos=0;
+    int temp=n;
+    while(temp>1) {
+        temp=temp>>1;
+        pos++;
+    }
+    n=n^(1<<pos);
+    return n;
+}
+int main() {
+	// your code goes here
+    int n;
+    scanf("%d",&n);
+    printf("%d\n",flip(n));
+    return 0;
+}
